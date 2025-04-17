@@ -1,0 +1,13 @@
+@<TRIPOS>MOLECULE
+Li+
+ 1 0 0 0 0
+SMALL
+USER_CHARGES
+
+@<TRIPOS>ATOM
+     1 Li+     0.0000   0.0000   0.0000 Li 1 LIG 1.0000
+
+@<TRIPOS>BOND
+
+@<TRIPOS>SUBSTRUCTURE
+     1 LIG         1 TEMP              0 ****  ****    0 ROOT

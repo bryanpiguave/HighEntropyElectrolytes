@@ -1,0 +1,13 @@
+tolerance 2.0
+filetype pdb
+output ec_li_box.pdb
+
+structure ec.pdb
+  number 15
+  inside box 0. 0. 0. 30. 30. 30.
+end structure
+
+structure li.pdb
+  number 1
+  inside box 0. 0. 0. 30. 30. 30.
+end structure
