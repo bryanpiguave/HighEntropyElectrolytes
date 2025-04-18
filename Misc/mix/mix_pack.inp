@@ -1,0 +1,23 @@
+tolerance 2.0
+filetype pdb
+output mixed_carbonates_1M.pdb
+
+structure ec_tagged.pdb
+  number 45
+  inside box 0. 0. 0. 25.1 25.1 25.1
+end structure
+
+structure dmc_tagged.pdb
+  number 45
+  inside box 0. 0. 0. 25.1 25.1 25.1
+end structure
+
+structure pc_tagged.pdb
+  number 45
+  inside box 0. 0. 0. 25.1 25.1 25.1
+end structure
+
+structure li.pdb
+  number 9
+  inside box 0. 0. 0. 25.1 25.1 25.1
+end structure

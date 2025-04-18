@@ -1,0 +1,53 @@
+# ----------------------------------------
+# Liquid Electrolyte Setup – Universal Protocol
+# ----------------------------------------
+
+neighbor 2.0 bin
+neigh_modify delay 0 every 1 check yes
+
+# --- Velocity Initialization ---
+velocity all create 10.0 4928459 mom yes rot yes dist gaussian
+
+# --- Energy Minimization ---
+reset_timestep 0
+thermo 100
+thermo_style custom step temp etotal pe press vol
+
+print "***** STARTING ENERGY MINIMIZATION *****"
+minimize 1.0e-4 1.0e-6 1000 10000
+print "***** DONE WITH ENERGY MINIMIZATION *****"
+
+# --- Gentle Pre-Stabilization (NVE + limit) ---
+fix pre all nve/limit 0.1
+timestep 1.0
+run 5000
+unfix pre
+print "***** GENTLE NVE/LIMIT PRE-STABILIZATION COMPLETE *****"
+
+# --- Temperature Ramp to Target (NVT) ---
+variable tstart equal 10.0
+variable tstop  equal 300.0
+fix nvt_ramp all nvt temp ${tstart} ${tstop} 100.0
+run 20000
+unfix nvt_ramp
+print "***** TEMPERATURE RAMP COMPLETE *****"
+
+# --- NPT Equilibration ---
+fix npt_eq all npt temp ${tstop} ${tstop} 100.0 iso 1.0 1.0 1000.0
+run 200000
+unfix npt_eq
+print "***** NPT EQUILIBRATION COMPLETE *****"
+
+# --- NVT Production Run ---
+reset_timestep 0
+timestep 1.0
+fix nvt_prod all nvt temp ${tstop} ${tstop} 100.0
+thermo 500
+thermo_style custom step temp pe ke etotal press vol density
+dump 1 all custom 1000 traj.lammpstrj id type x y z
+
+print "***** START OF PRODUCTION *****"
+run 2000000
+unfix nvt_prod
+undump 1
+print "***** END OF PRODUCTION *****"

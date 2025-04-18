@@ -1,0 +1,13 @@
+tolerance 2.0
+filetype pdb
+output pc400_li27.pdb
+
+structure pc_named.pdb
+  number 400
+  inside box 0. 0. 0. 35.5 35.5 35.5
+end structure
+
+structure li.pdb
+  number 27
+  inside box 0. 0. 0. 35.5 35.5 35.5
+end structure

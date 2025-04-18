@@ -1,0 +1,13 @@
+tolerance 2.0
+filetype pdb
+output dmc_li.pdb
+
+structure dmc.pdb
+  number 405
+  inside box 0.0 0.0 0.0 38.3 38.3 38.3
+end structure
+
+structure li.pdb
+  number 27
+  inside box 0.0 0.0 0.0 38.3 38.3 38.3
+end structure
